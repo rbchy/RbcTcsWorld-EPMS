@@ -1,216 +1,272 @@
-# EPMS — Enterprise Payroll Management System
+<div align="center">
 
-A full-stack payroll platform built from the ground up — a Spring Boot REST API backed by MySQL/JPA, paired with a native JavaFX desktop client — and backed by a **79-test** automated QA suite (unit, service, REST-API/integration, and headless UI automation) wired into a GitHub Actions CI pipeline with Allure reporting.
+# 💼 RbcTcsWorld EPMS — Enterprise Payroll Management System
 
-Where a typical QA-automation portfolio project (e.g. a Selenium/Cucumber harness driving an existing HRM demo) proves *"I can test a system built before,"* EPMS proves the other half of the job: **"I can build the system, then design and automate the tests that keep it honest."** See [How this compares to a pure test-automation project](#how-this-compares-to-a-pure-test-automation-project-eg-orangehrm-payroll-automation) below.
+### Spring Boot payroll REST API + native JavaFX desktop client — payroll math, time clock, W-2, YTD tax, double-entry GL — tested from unit to headless UI
 
-**Ranajit B Chowdhury** — QA Automation Engineer & Full-Stack Developer
-Test Automation Specialist · Java · Spring Boot · JavaFX · JUnit 5 · TestFX · Mockito
+[![Typing SVG](https://readme-typing-svg.demolab.com/?font=Fira+Code&size=18&pause=1500&color=FFC107&center=true&vCenter=true&width=900&repeat=true&lines=Java+21+%C2%B7+Spring+Boot+3.5+%C2%B7+JavaFX+21+%C2%B7+MySQL+8;Payroll+%C2%B7+Time+Clock+%C2%B7+W-2+%C2%B7+YTD+Tax+%C2%B7+General+Ledger;79+%2F+79+tests+green+%C2%B7+headless+TestFX+in+CI)](https://git.io/typing-svg)
 
-[![GitHub](https://img.shields.io/badge/rbchy-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rbchy)
-[![LinkedIn](https://img.shields.io/badge/rbchy-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/rbchy)
+<!-- ============ STATUS BAR ============ -->
+[![CI](https://github.com/rbchy/RbcTcsWorld-EPMS/actions/workflows/ci.yml/badge.svg)](https://github.com/rbchy/RbcTcsWorld-EPMS/actions/workflows/ci.yml)
+![Tests](https://img.shields.io/badge/Tests-79%20%2F%2079%20passed-22c55e?style=for-the-badge&logo=checkmarx&logoColor=white)
+![Domain](https://img.shields.io/badge/Domain-Payroll%20%C2%B7%20HR%20%C2%B7%20Accounting-155e75?style=for-the-badge)
 
-[![CI](https://github.com/rbchy/epms-payroll-management-system/actions/workflows/ci.yml/badge.svg)](https://github.com/rbchy/epms-payroll-management-system/actions/workflows/ci.yml)
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![JavaFX](https://img.shields.io/badge/JavaFX-21.0.8-orange?style=for-the-badge&logo=java&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![JUnit 5](https://img.shields.io/badge/JUnit%205-Mockito-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+![TestFX](https://img.shields.io/badge/TestFX-Monocle%20headless-3E7BC4?style=for-the-badge)
+![Allure](https://img.shields.io/badge/Allure-2.35-FF6C37?style=for-the-badge)
 
-> The CI badge above assumes this repo is pushed to `github.com/rbchy/epms-payroll-management-system` — update the URL to match wherever you actually push it.
+![Last Commit](https://img.shields.io/github/last-commit/rbchy/RbcTcsWorld-EPMS?style=flat-square&color=0d9488&label=Last%20commit)
+![Repo Size](https://img.shields.io/github/repo-size/rbchy/RbcTcsWorld-EPMS?style=flat-square&color=155e75&label=Repo%20size)
 
----
-
-## Tools & Technologies
-
-<p>
-  <img src="https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21" />
-  <img src="https://img.shields.io/badge/Maven-Multi--Module-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven" />
-  <img src="https://img.shields.io/badge/Spring_Boot-3.5.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot" />
-  <img src="https://img.shields.io/badge/Spring_Data_JPA-Hibernate_6.6-6DB33F?style=for-the-badge&logo=hibernate&logoColor=white" alt="Spring Data JPA / Hibernate" />
-  <img src="https://img.shields.io/badge/MySQL-8.x-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
-  <img src="https://img.shields.io/badge/H2-In--Memory_Test_DB-1F4E79?style=for-the-badge&logo=databricks&logoColor=white" alt="H2" />
-</p>
-<p>
-  <img src="https://img.shields.io/badge/JavaFX-21.0.8-orange?style=for-the-badge&logo=java&logoColor=white" alt="JavaFX" />
-  <img src="https://img.shields.io/badge/TestFX-4.0.18-3E7BC4?style=for-the-badge&logo=java&logoColor=white" alt="TestFX" />
-  <img src="https://img.shields.io/badge/Monocle-Headless_UI-3E7BC4?style=for-the-badge&logo=java&logoColor=white" alt="Monocle" />
-  <img src="https://img.shields.io/badge/JUnit_5-Jupiter-25A162?style=for-the-badge&logo=junit5&logoColor=white" alt="JUnit 5" />
-  <img src="https://img.shields.io/badge/Mockito-5.14-78C257?style=for-the-badge&logo=java&logoColor=white" alt="Mockito" />
-  <img src="https://img.shields.io/badge/MockMvc-Spring_Test-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="MockMvc" />
-</p>
-<p>
-  <img src="https://img.shields.io/badge/Allure_Report-2.35-FF5A5F?style=for-the-badge&logo=qameta&logoColor=white" alt="Allure Report" />
-  <img src="https://img.shields.io/badge/GitHub_Actions-CI-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
-  <img src="https://img.shields.io/badge/AspectJ-Weaver-A9225C?style=for-the-badge&logo=java&logoColor=white" alt="AspectJ" />
-  <img src="https://img.shields.io/badge/Jackson-JSON-black?style=for-the-badge&logo=json&logoColor=white" alt="Jackson" />
-</p>
+</div>
 
 ---
 
-## What EPMS Is
+## 📌 At a Glance
 
-A two-module Maven reactor, both modules pinned to **JDK 21** via `maven-toolchains-plugin`:
+<table>
+<tr>
+<td width="50%" valign="top">
 
-| Module | What it is |
+**🙋 What this is**
+
+A payroll platform built from scratch, together with the tests that keep it honest. It has two parts:
+
+- **`payroll-backend`**: a Spring Boot REST API for employees, payroll calculation and payslips, time clock, W-2s, year-to-date tax, a double-entry general ledger, an audit log, BCrypt login with tokens, and a health check
+- **`javafx-desktop`**: a native JavaFX client for that API, with login, dashboard, employees, payroll, time clock, payslips, reports, W-2, the ledger, the audit log, settings and help in **6 languages**
+
+Most QA portfolio projects test a system someone else built. EPMS shows the other half of the job: **building the system and designing the tests for every layer of it.**
+
+Every push runs all 79 tests in **GitHub Actions**, including the JavaFX UI tests, headless through Monocle with no virtual display.
+
+</td>
+<td width="50%" valign="top">
+
+**📍 Quick facts**
+
+| | |
 |---|---|
-| `payroll-backend` | Spring Boot 3.5.5 REST API — employees, payroll calculation/payslips, time clock, W-2s, YTD tax withholding, GL journal/account balances, audit log, BCrypt auth, health check. MySQL in production, H2 in-memory for the `test` profile. |
-| `javafx-desktop` | A native JavaFX desktop client consuming that API — login, dashboard, employee CRUD, payroll calculator, time clock — packaged as a standalone app via `jpackage`. |
+| 🧩 **API** | 9 controllers · 27 endpoints · port 8090 |
+| 🖥️ **Desktop** | 20 JavaFX screens · EN / বাংলা / ES / हिन्दी / FR / 中文 |
+| 🧪 **Tests** | 67 backend · 12 desktop UI |
+| ✅ **CI** | 79 / 79 · JDK 21 · ≈ 1.5 min |
+| 🔐 **Security** | BCrypt passwords · token filter on `/api/*` |
+| 📊 **Reports** | Allure HTML · JUnit summary in the run |
 
-### Backend REST surface
+</td>
+</tr>
+</table>
 
-| Domain | Endpoints | Controller |
+---
+
+## ✅ Latest Results
+
+| Layer | Tests | What is asserted | Result |
+|---|---:|---|---|
+| 🧮 Payroll math (`PayrollCalculatorTest`) | 4 | A reference paystub, line for line: gross, taxable wages, federal / SS / Medicare / PA / local / LST / SUI, health, 401(k), Roth, catch-ups, employer match, net · gross = sum of earnings · net = gross − every deduction | ![passed](https://img.shields.io/badge/-4%20passed-22c55e?style=flat-square) |
+| 🔐 Security (`TokenServiceTest`) | 4 | A token resolves to its user · every token is unique · unknown and revoked tokens resolve to nobody | ![passed](https://img.shields.io/badge/-4%20passed-22c55e?style=flat-square) |
+| 🧩 Services, Mockito (7 classes) | 30 | Clock-in / clock-out state machine · payroll void / reverse rules · W-2 and YTD aggregation · balanced journal entries · login failure paths | ![passed](https://img.shields.io/badge/-30%20passed-22c55e?style=flat-square) |
+| 🌐 API, MockMvc + H2 (9 classes) | 29 | Real Spring context, JPA and SQL · 200 / 201 / 400 / 401 / 404 / 409 from the global error handler · seeded chart of accounts · journal per saved payroll | ![passed](https://img.shields.io/badge/-29%20passed-22c55e?style=flat-square) |
+| 🖥️ JavaFX UI, TestFX + Monocle (5 classes) | 12 | Valid and invalid login · dashboard navigation · employee table, add and required-field alert · calculate enables *Save Payslip* · clock-in, and the error alert when history fails to load | ![passed](https://img.shields.io/badge/-12%20passed-22c55e?style=flat-square) |
+| **Total** | **79** | | **100 %** |
+
+<sub>GitHub Actions, Ubuntu, Temurin 21 ([workflow](.github/workflows/ci.yml)). Tests are tagged `@Tag("positive")` / `@Tag("negative")`. The Allure report and raw results are kept as build artifacts.</sub>
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+  subgraph Desktop["javafx-desktop"]
+    V["20 JavaFX views<br/>+ I18n (6 languages)"] --> C["ApiClient<br/>(java.net.http + Jackson)"]
+  end
+  C -->|"REST + token<br/>:8090/api"| F
+  subgraph Backend["payroll-backend (Spring Boot)"]
+    F["TokenFilter"] --> CT["9 controllers"]
+    CT --> S["8 services<br/>PayrollCalculator · TimeClock · W2 · Tax ·<br/>PayrollAccounting · Audit · Auth · Employee"]
+    S --> R["8 JPA repositories"]
+    CT -.-> GE["GlobalExceptionHandler<br/>{timestamp, status, error, message}"]
+  end
+  R --> DB[("MySQL 8<br/>H2 in tests")]
+```
+
+### Payroll → general ledger
+
+```mermaid
+flowchart LR
+  T["Time entries"] --> P["PayrollCalculator<br/>gross · taxes · deductions · net"]
+  P --> SV["POST /api/payroll/save"]
+  SV --> J["Balanced journal entry<br/>Dr 5000 wages · 5010 FICA match · 5020 401(k) match<br/>Cr 2000 federal · 2010 FICA · … · cash"]
+  SV --> A[("Audit log")]
+  J --> B["GET /api/accounting/balances"]
+  SV -->|"void / reverse"| J
+```
+
+---
+
+## 🧩 API
+
+| Domain | Endpoints |
+|---|---|
+| 🔐 Auth | `POST /api/auth/login` |
+| 👤 Employees | `GET/POST /api/employees` · `GET/PUT/DELETE /api/employees/{id}` · `PATCH /api/employees/{id}/status` |
+| 💵 Payroll | `POST /api/payroll/calculate` · `POST /api/payroll/save` · `GET /api/payroll` · `GET /api/payroll/employee/{id}` · `PATCH …/status` · `…/void` · `…/reverse` |
+| ⏱️ Time clock | `POST /api/time-entries/clock-in` · `POST /api/time-entries/{id}/clock-out` · `GET /api/time-entries` · `GET /api/time-entries/employee/{id}` |
+| 🧾 W-2 · Tax | `GET /api/w2/{employeeId}/{year}` · `GET /api/w2/year/{year}` · `GET /api/tax/ytd/{employeeId}` · `GET /api/tax/ytd-all` |
+| 📒 Accounting | `GET /api/accounting/journal` · `GET /api/accounting/balances` |
+| 🧾 Audit · Health | `GET /api/audit` · `GET /api/audit/entity` · `GET /api/health` |
+
+Every failure that should be a 4xx is returned as `{timestamp, status, error, message}` instead of a raw 500:
+
+| Status | When |
+|---|---|
+| **404** | Unknown resource |
+| **409** | A business-rule conflict, such as a double clock-in or voiding a processed payroll |
+| **401** | Bad credentials |
+| **400** | Invalid input |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Version |
 |---|---|---|
-| Auth | `POST /api/auth/login` | `AuthController` |
-| Employees | `GET/POST /api/employees`, `GET/PUT/DELETE /api/employees/{id}`, `PATCH /api/employees/{id}/status` | `EmployeeController` |
-| Payroll | `POST /api/payroll/calculate`, `POST /api/payroll/save`, `GET /api/payroll`, `GET /api/payroll/employee/{id}`, `PATCH .../status`, `.../void`, `.../reverse` | `PayrollController` |
-| Time Clock | `POST /api/time-entries/clock-in`, `POST /api/time-entries/{id}/clock-out`, `GET /api/time-entries`, `GET /api/time-entries/employee/{id}` | `TimeClockController` |
-| W-2 | `GET /api/w2/{employeeId}/{year}`, `GET /api/w2/year/{year}` | `W2Controller` |
-| Tax | `GET /api/tax/ytd/{employeeId}`, `GET /api/tax/ytd-all` | `TaxController` |
-| Accounting | `GET /api/accounting/journal`, `GET /api/accounting/balances` | `AccountingController` |
-| Audit | `GET /api/audit`, `GET /api/audit/entity` | `AuditController` |
-| Health | `GET /api/health` | `HealthController` |
-
-Every write path runs through a service layer (`EmployeeService`, `PayrollService`, `TimeClockService`, `AuthService`, `W2Service`, `TaxAccountingService`, `PayrollAccountingService`, `AuditLogService`) backed by 8 Spring Data JPA repositories, and every 4xx-worthy failure — unknown resource, a business-rule conflict (double clock-in, voiding an already-processed payroll), bad credentials, a constraint violation — is normalized by a global `@RestControllerAdvice` (`GlobalExceptionHandler`) into a consistent `{timestamp, status, error, message}` JSON body, instead of leaking a raw 500.
+| Language | Java (enforced with `maven-toolchains-plugin`) | 21 |
+| Backend | Spring Boot (Web, Data JPA, Validation) · Hibernate · spring-security-crypto | 3.5.5 |
+| Database | MySQL · H2 for the `test` profile | 8 |
+| Desktop | JavaFX · Jackson · `java.net.http` | 21.0.8 |
+| Unit / service tests | JUnit 5 · Mockito | — |
+| API tests | Spring MockMvc on H2 | — |
+| UI tests | TestFX + Monocle (headless) | 4.0.18 · 21.0.2 |
+| Reporting | Allure + AspectJ · `mikepenz/action-junit-report` | 2.35 |
+| Packaging | `jpackage` (see `scripts/package-windows.ps1`) | — |
 
 ---
 
-## Test Architecture — 79 automated tests, 0 manual steps
-
-Like a mature QA suite, this isn't one style of test bolted on — it's layered, matching each layer of the app to the cheapest test that can catch its bugs.
-
-| Layer | What it proves | Tooling | Count |
-|---|---|---|---|
-| Unit — payroll math | Gross pay, OT/doubletime, 401(k)/Roth %, tax withholding math is correct in isolation | JUnit 5 | `PayrollCalculatorTest` — 4 |
-| Unit — security | Token issuance/validation | JUnit 5 | `TokenServiceTest` — 4 |
-| Unit — services (mocked repos) | Business rules in isolation from Spring/DB: clock-in/out state machine, payroll void/reverse rules, W-2/tax aggregation, auth failure paths | JUnit 5 + Mockito | 7 classes — 30 |
-| Integration / API (positive + negative) | Full Spring context + real JPA/Hibernate/SQL (H2) through `MockMvc`, asserting real HTTP status codes — including the 404/409/401/400 paths the `GlobalExceptionHandler` produces | JUnit 5 + Spring `MockMvc` + H2 | 9 classes — 29 |
-| UI automation (headless) | Every JavaFX screen driven like a real user — clicking, typing, selecting, dismissing validation alerts — with the real screens and a mocked API client | JUnit 5 + TestFX + Monocle | 5 classes — 12 |
-| **Total** | | | **79** |
-
-**Backend (67 — `payroll-backend/src/test`)**
-
-| Class | Tests | Class | Tests |
-|---|---|---|---|
-| `EmployeeApiTest` | 5 | `EmployeeServiceTest` | 6 |
-| `PayrollApiTest` | 4 | `PayrollServiceTest` | 5 |
-| `TimeClockApiTest` | 4 | `TimeClockServiceTest` | 5 |
-| `AuthApiTest` | 3 | `AuthServiceTest` | 4 |
-| `W2ApiTest` | 3 | `W2ServiceTest` | 4 |
-| `TaxApiTest` | 3 | `TaxAccountingServiceTest` | 4 |
-| `AccountingApiTest` | 3 | `PayrollAccountingServiceTest` | 2 |
-| `AuditApiTest` | 3 | `TokenServiceTest` | 4 |
-| `HealthApiTest` | 1 | `PayrollCalculatorTest` | 4 |
-
-**Desktop UI (12 — `javafx-desktop/src/test`)**
-
-| Class | Tests | Covers |
-|---|---|---|
-| `LoginViewTest` | 2 | Valid/invalid login |
-| `DashboardViewTest` | 3 | Navigation to Employees/Payroll/Time Clock, Back |
-| `EmployeeViewTest` | 3 | Table load, add/save with validation, required-field validation alert |
-| `PayrollViewTest` | 2 | Calculate → enables Save Payslip; validation when no employee selected |
-| `TimeClockViewTest` | 2 | Clock-in flow; error alert when history fails to load |
-
-Positive and negative cases are tagged (`@Tag("positive")` / `@Tag("negative")`) throughout, so either can be filtered and run independently.
-
----
-
-## CI/CD & Reporting
-
-- **GitHub Actions** (`.github/workflows/ci.yml`) — on every push/PR to `main`/`master`: sets up JDK 21 (Temurin, with Maven's toolchain auto-generated), runs `payroll-backend` then `javafx-desktop` tests headlessly (Monocle — **no Xvfb needed**, even for the JavaFX UI tests), generates the Allure HTML report, publishes a JUnit test-result summary via `mikepenz/action-junit-report`, and uploads both the Allure site and raw results as build artifacts.
-- **Allure** — both modules emit `allure-results` (via `allure-jupiter`); merge the two into one folder to see all 79 tests — backend and desktop — in a single report:
-  ```bash
-  mkdir -p combined-allure-results
-  cp payroll-backend/target/allure-results/*  combined-allure-results/
-  cp javafx-desktop/target/allure-results/*   combined-allure-results/
-  payroll-backend/.allure/allure-2.30.0/bin/allure serve combined-allure-results
-  ```
-  Or, per module: `mvn allure:serve` (opens immediately) or `mvn allure:report` (writes to `target/site/allure-maven-plugin/index.html`).
-
----
-
-## Running It Locally
-
-### 1. Database
-Install MySQL 8.x and run `database/schema.sql`. (Tests never touch this — they run against an in-memory H2 database under the `test` Spring profile.)
-
-### 2. Configure the backend
-`payroll-backend/src/main/resources/application.properties`:
-```properties
-spring.datasource.password=YOUR_MYSQL_PASSWORD
-```
-
-### 3. Build & test everything
-```bash
-mvn clean test          # from the repo root — runs both modules, 79 tests
-```
-
-### 4. Run the backend
-```bash
-mvn -pl payroll-backend spring-boot:run
-```
-API: `http://localhost:8080/api/health`. First boot seeds `admin` / `admin123` — **change this before any real use.**
-
-### 5. Run the JavaFX client
-```bash
-mvn -pl javafx-desktop javafx:run
-```
-
-### 6. Package the desktop app
-After a successful build, package with `jpackage` using a bundled JDK 21 runtime — see `scripts/package-windows.ps1`.
-
----
-
-## How This Compares to a Pure Test-Automation Project (e.g. OrangeHRM Payroll Automation)
-
-Both projects are QA/SDET portfolio work from the same author, and they're deliberately complementary rather than duplicates:
-
-| | **EPMS (this repo)** | **OrangeHRM Payroll Automation** |
-|---|---|---|
-| System under test | A real application **built from scratch** in this same repo (Spring Boot + MySQL + JavaFX) | An existing third-party HRM demo (OrangeHRM) plus a locally stubbed payroll/tax API |
-| What it demonstrates | Full-stack delivery *and* the test strategy for it — API design, exception handling, persistence, a desktop UI, and 79 tests across every layer | Pure black-box test-automation craft against a system you don't own or control |
-| UI automation | JavaFX desktop via TestFX/Monocle, fully headless | Web UI via Selenium/Cucumber BDD against a live browser |
-| API testing | Spring `MockMvc` against the real controllers/services/JPA layer in-process | REST Assured against real HTTP endpoints (in-process app + external demo) |
-| Test types covered | Unit → service (mocked) → integration/API → UI, each mapped to its cheapest layer | Smoke, sanity, regression, positive/negative, data-driven, mobile (Appium), performance (JMeter) |
-| Language/stack | Java 21, JUnit 5, Mockito, TestFX | Java 11, TestNG, Cucumber, REST Assured, Appium, JMeter |
-| CI/reporting | GitHub Actions + Allure (both modules merged into one report) | GitHub Actions + Allure |
-
-Read together, the two repos show the same engineer on both sides of the fence: building the product and the tests for it here, and rigorously automating against someone else's product there.
-
----
-
-## Reference Payroll Calculation
-
-The payroll calculator screen's demo defaults reproduce a known reference paystub's gross/net figures for regression-checking the math:
-
-- Hourly $18.55 · Regular 40h · Doubletime 8h @ 2× · Extra $3 × 40h · Extra $6 × 8h
-- Health $82.34 · Traditional 401(k) 5% + 1% catch-up · Roth 1% + 1% catch-up
-
-> **Note:** the fixed-percentage federal withholding used here is a *demo* stand-in. A real payroll product must compute federal withholding from the applicable IRS/W-4 withholding tables and their effective dates, not a flat percentage.
-
----
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-EPMS/
-├── payroll-backend/          Spring Boot REST API
+RbcTcsWorld-EPMS/
+├── .github/workflows/ci.yml       ← backend tests → desktop UI tests (headless) → Allure
+├── payroll-backend/
 │   ├── src/main/java/com/epms/payroll/
-│   │   ├── controller/       9 REST controllers
-│   │   ├── service/          Business logic (8 services)
-│   │   ├── repository/       8 Spring Data JPA repositories
-│   │   ├── entity/           JPA entities
-│   │   └── exception/        GlobalExceptionHandler + typed exceptions
-│   └── src/test/java/com/epms/payroll/
-│       ├── integration/      9 MockMvc API test classes (29 tests)
-│       ├── service/          7 mocked-service unit test classes (30 tests)
-│       └── security/         TokenServiceTest (4 tests)
-├── javafx-desktop/           JavaFX client
-│   ├── src/main/java/com/epms/desktop/ui/   Login, Dashboard, Employee, Payroll, Time Clock views
-│   └── src/test/java/com/epms/desktop/ui/   5 TestFX/Monocle headless UI test classes (12 tests)
-├── database/schema.sql
+│   │   ├── controller/            9 REST controllers
+│   │   ├── service/               PayrollCalculator + 8 services
+│   │   ├── repository/ entity/ dto/
+│   │   ├── security/              TokenService, TokenFilter
+│   │   ├── exception/             GlobalExceptionHandler + typed exceptions
+│   │   └── config/                DataInitializer (admin, demo data, chart of accounts)
+│   └── src/test/java/…            PayrollCalculatorTest · security/ · service/ · integration/
+├── javafx-desktop/
+│   ├── src/main/java/com/epms/desktop/   MainApp · ApiClient · I18n · ui/ (20 views)
+│   └── src/test/java/…/ui/              5 TestFX test classes
+├── database/schema.sql · sample-api.json
 ├── scripts/package-windows.ps1
-└── .github/workflows/ci.yml
+└── pom.xml                        ← parent (two modules)
 ```
 
 ---
 
-## License
+## ⚙️ Getting Started
 
-Personal portfolio / demonstration project. Not licensed for production use as-is — see the withholding-tax note above.
+**Prerequisites:** JDK 21 · Maven 3.9+ · MySQL 8
+
+```bash
+git clone https://github.com/rbchy/RbcTcsWorld-EPMS.git
+cd RbcTcsWorld-EPMS
+
+mvn clean test                                   # all 79 tests (H2 + headless UI, no MySQL needed)
+
+mysql -u root -p < database/schema.sql
+export DB_USERNAME=root DB_PASSWORD='your-mysql-password'
+mvn -pl payroll-backend spring-boot:run          # http://localhost:8090/api/health
+mvn -pl javafx-desktop javafx:run                # desktop client
+```
+
+On first start the backend seeds the user `admin` / `admin123`. **Change it before any real use.**
+
+| Report | How |
+|---|---|
+| Allure, one module | `mvn -pl payroll-backend io.qameta.allure:allure-maven:2.15.0:serve` |
+| Allure, both modules | copy both `target/allure-results` folders into one, then `allure serve` it |
+| Desktop installer | `mvn -pl javafx-desktop clean package`, then `scripts/package-windows.ps1` |
+
+---
+
+## 🔄 How It Compares to a Pure Test-Automation Project
+
+| | **EPMS (this repo)** | **[OrangeHRM Payroll Automation](https://github.com/rbchy/OrangeHRM_TestAutomation_TestNG_Junit5)** |
+|---|---|---|
+| System under test | Built from scratch here: Spring Boot, MySQL and JavaFX | An existing third-party HRM demo, plus a stubbed payroll API |
+| Shows | Full-stack delivery and the test strategy for it | Black-box automation of a system you do not own |
+| UI automation | JavaFX through TestFX / Monocle, headless | Web UI through Selenium / Cucumber |
+| API testing | MockMvc against the real controllers, services and JPA | REST Assured against real HTTP endpoints, with WireMock |
+| Stack | Java 21 · JUnit 5 · Mockito · TestFX | JUnit 5 · TestNG · REST Assured · WireMock |
+
+---
+
+## 🧹 Maintenance Log
+
+| Change | Why |
+|---|---|
+| **Added the source code:** `payroll-backend`, `javafx-desktop`, all 79 tests and the CI workflow | The GitHub repo held only the README, the parent `pom.xml` and the SQL script. The two modules the README described were never pushed, so nothing could be built from GitHub |
+| MySQL password removed from `application.properties`; now `DB_PASSWORD` (plus `DB_USERNAME` / `DB_HOST`) | A real database password was in the config file |
+| `TimeClockViewTest` waits for the alert's content and closes it by `ButtonType.OK` | The test clicked a node labelled "OK" before the dialog was laid out, which failed on the CI runner. It now also checks the alert shows the API's error |
+| CI runs on every branch push; the badge points at this repo | It ran only on `main` / `master`, and the badge pointed at a different repo name |
+| `.gitignore` for `target/`, IDE files and AspectJ `ajcore` dumps | Build output was not ignored |
+| README corrected | The API port is **8090**, not 8080. The desktop has 20 screens, not 5. The CI badge now points at the real repo |
+
+---
+
+## 📈 Roadmap
+
+- [x] Source on GitHub, CI green for both modules
+- [ ] IRS / W-4 table-based federal withholding (the current flat rate is a demo stand-in)
+- [ ] Role-based authorization per endpoint (ADMIN / HR / EMPLOYEE)
+- [ ] Testcontainers MySQL for repository tests
+- [ ] TestFX coverage for the W-2, report and ledger screens
+- [ ] Publish the combined Allure report to GitHub Pages
+- [ ] macOS / Linux `jpackage` installers in CI
+
+---
+
+## 🔗 Related Projects
+
+| Project | Stack |
+|---|---|
+| 🧾 [OrangeHRM Payroll Automation](https://github.com/rbchy/OrangeHRM_TestAutomation_TestNG_Junit5) | JUnit 5 · TestNG · REST Assured · WireMock — 66 / 66 in CI |
+| 💊 [PharmaPack QMS — Serialization & Line Control](https://github.com/rbchy/RbcTcsWorld_PharmaPackQMS_Serialization) | Spring Boot · React · L3 serialization — 77 / 77 in CI |
+| 🧮 [Pharmaceutical Production Calculator](https://github.com/rbchy/RbcTcsWorld_Pharmaceuticals_PMC) | Spring Boot · MySQL · Selenium — 81 / 81 in CI |
+| ⭐ [RbcTcsWorld E-Commerce Suite](https://github.com/rbchy/RbcTcsWorld_ECommerceSuite) | Spring Boot · REST Assured · Selenium · Playwright · CI quality gates |
+
+<sub>All projects: [github.com/rbchy](https://github.com/rbchy)</sub>
+
+---
+
+## ⚠️ Disclaimer
+
+This is a personal portfolio / demonstration project. It is **not** for real payroll as-is: federal withholding uses a flat demo rate instead of the IRS / W-4 tables, and the seeded admin password is public.
+
+---
+
+## 👤 Author
+
+<div align="center">
+
+**Ranajit Baran Chowdhury (RB Chowdhury)**
+QA Automation Engineer / SDET · Full-Stack Developer · West Norriton, Pennsylvania, USA
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rbchy/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rbchy)
+[![Website](https://img.shields.io/badge/Website-rbchy.github.io%2Frbchy-0d9488?style=for-the-badge&logo=githubpages&logoColor=white)](https://rbchy.github.io/rbchy/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Website-blueviolet?style=for-the-badge&logo=wix&logoColor=white)](https://rbc6543.wixsite.com/rbc-portfolio)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:chyranajit@gmail.com)
+
+⭐ *If this project helps you, a star on the repo is appreciated.*
+
+</div>
