@@ -7,7 +7,10 @@ import javafx.application.Platform;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.DisplayName;
@@ -113,7 +116,18 @@ class TimeClockViewTest extends ApplicationTest {
         assertTrue(listWindows().size() > windowsBefore,
                 "an error Alert must appear when the API fails to load this employee's time entries");
 
-        clickOn("OK");
-        WaitForAsyncUtils.waitForFxEvents();
+        // Wait for the Alert's DialogPane itself (the new window can be listed a moment before its
+        // content is laid out), check it reports the API failure, then press its OK button. The
+        // button is found by ButtonType, not by its label, so the test does not depend on the
+        // platform's language; fire() is posted with runLater for the same deadlock reason as above.
+        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS, () -> lookup(".dialog-pane").tryQuery().isPresent());
+        DialogPane pane = lookup(".dialog-pane").queryAs(DialogPane.class);
+        assertTrue(pane.getContentText().contains("Server unavailable"),
+                "the Alert must show the API's error, but says: " + pane.getContentText());
+
+        Button ok = (Button) pane.lookupButton(ButtonType.OK);
+        Platform.runLater(ok::fire);
+        WaitForAsyncUtils.waitFor(5, TimeUnit.SECONDS, () -> listWindows().size() == windowsBefore);
+        assertEquals(windowsBefore, listWindows().size(), "OK must close the error Alert");
     }
 }
