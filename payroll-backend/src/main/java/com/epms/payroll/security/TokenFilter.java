@@ -1,0 +1,3 @@
+package com.epms.payroll.security;
+import jakarta.servlet.*; import jakarta.servlet.http.*; import org.springframework.stereotype.Component; import java.io.IOException;
+@Component public class TokenFilter implements Filter { private final TokenService tokens; public TokenFilter(TokenService t){tokens=t;} public void doFilter(ServletRequest r,ServletResponse s,FilterChain c)throws IOException,ServletException{HttpServletRequest req=(HttpServletRequest)r; String h=req.getHeader("Authorization"); if(h!=null&&h.startsWith("Bearer ")){String u=tokens.username(h.substring(7)); if(u!=null) req.setAttribute("username",u);} c.doFilter(r,s);} }

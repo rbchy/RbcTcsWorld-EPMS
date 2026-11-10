@@ -1,0 +1,70 @@
+name: EPMS CI
+
+# Runs the full test suite (payroll-backend unit + integration/API tests, javafx-desktop
+# headless TestFX UI tests) on every push and pull request, then publishes the Allure report
+# as a downloadable build artifact. Monocle's headless platform means the JavaFX tests need
+# no virtual display (Xvfb) on the runner — see javafx-desktop/pom.xml's surefire config.
+on:
+  push:
+  pull_request:
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    name: Build & test (JDK 21, Ubuntu)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # Also auto-generates ~/.m2/toolchains.xml for JDK 21, which both modules' pom.xml
+      # already declare a <maven-toolchains-plugin> requirement against.
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Run payroll-backend tests (unit + integration/API, H2, security, edge cases)
+        working-directory: payroll-backend
+        run: mvn -B --no-transfer-progress clean test
+
+      - name: Run javafx-desktop tests (headless TestFX UI automation via Monocle)
+        working-directory: javafx-desktop
+        run: mvn -B --no-transfer-progress clean test
+
+      # allure:serve's bare-prefix form doesn't resolve on a clean CI runner (no ~/.m2/settings.xml
+      # pluginGroup, and even with one, Maven Central doesn't reliably publish a prefix mapping
+      # for this third-party plugin group) — so this uses the plugin's full coordinates instead,
+      # and "report" (a static site) rather than "serve" (an interactive Jetty server), which
+      # would just hang the job.
+      - name: Generate the Allure HTML report
+        if: always()
+        working-directory: payroll-backend
+        run: mvn -B --no-transfer-progress io.qameta.allure:allure-maven:2.15.0:report
+
+      - name: Publish test results (JUnit + surefire XML from both modules)
+        if: always()
+        uses: mikepenz/action-junit-report@v4
+        with:
+          report_paths: '**/target/surefire-reports/TEST-*.xml'
+          require_tests: true
+
+      - name: Upload the Allure HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: payroll-backend/target/site/allure-maven-plugin
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Upload the raw Allure results (re-runnable / re-mergeable JSON)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: payroll-backend/target/allure-results
+          retention-days: 30
+          if-no-files-found: warn

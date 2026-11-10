@@ -1,0 +1,11 @@
+target/
+.DS_Store
+*.iml
+.idea/
+.project
+.classpath
+.settings/
+ajcore.*.txt
+combined-allure-results/
+.allure/
+epms-src-for-github.tgz

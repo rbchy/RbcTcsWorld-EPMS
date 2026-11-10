@@ -1,0 +1,3 @@
+package com.epms.payroll.config;
+import com.epms.payroll.security.TokenFilter; import org.springframework.context.annotation.*; import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; import org.springframework.security.crypto.password.PasswordEncoder; import org.springframework.boot.web.servlet.FilterRegistrationBean;
+@Configuration public class SecurityConfig { @Bean PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder();} @Bean FilterRegistrationBean<TokenFilter> tokenFilterRegistration(TokenFilter f){FilterRegistrationBean<TokenFilter> b=new FilterRegistrationBean<>(f); b.addUrlPatterns("/api/*"); b.setOrder(1); return b;} }

@@ -1,0 +1,26 @@
+package com.epms.payroll.entity;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Entity @Table(name="payrolls")
+public class Payroll {
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id;
+    @ManyToOne(optional=false) private Employee employee;
+    private LocalDate periodBeginning, periodEnding, payDate;
+    @Column(precision=14,scale=2) private BigDecimal regularHours=BigDecimal.ZERO, doubletimeHours=BigDecimal.ZERO, extraHours1=BigDecimal.ZERO, extraHours2=BigDecimal.ZERO;
+    @Column(precision=14,scale=2) private BigDecimal regularRate=BigDecimal.ZERO, doubletimeRate=BigDecimal.ZERO, extraRate1=BigDecimal.ZERO, extraRate2=BigDecimal.ZERO;
+    @Column(precision=14,scale=2) private BigDecimal regularPay=BigDecimal.ZERO, doubletimePay=BigDecimal.ZERO, extraPay1=BigDecimal.ZERO, extraPay2=BigDecimal.ZERO;
+    @Column(precision=14,scale=2) private BigDecimal grossPay=BigDecimal.ZERO, federalTaxableWages=BigDecimal.ZERO;
+    @Column(precision=14,scale=2) private BigDecimal federalTax=BigDecimal.ZERO, socialSecurityTax=BigDecimal.ZERO, medicareTax=BigDecimal.ZERO, paTax=BigDecimal.ZERO, localTax=BigDecimal.ZERO, lst=BigDecimal.ZERO, paSui=BigDecimal.ZERO;
+    @Column(precision=14,scale=2) private BigDecimal health=BigDecimal.ZERO, traditional401k=BigDecimal.ZERO, roth=BigDecimal.ZERO, traditionalCatchUp=BigDecimal.ZERO, rothCatchUp=BigDecimal.ZERO, netPay=BigDecimal.ZERO, employerMatch=BigDecimal.ZERO;
+    private String status="CALCULATED";
+    public Long getId(){return id;} public Employee getEmployee(){return employee;} public void setEmployee(Employee v){employee=v;} public LocalDate getPeriodBeginning(){return periodBeginning;} public void setPeriodBeginning(LocalDate v){periodBeginning=v;} public LocalDate getPeriodEnding(){return periodEnding;} public void setPeriodEnding(LocalDate v){periodEnding=v;} public LocalDate getPayDate(){return payDate;} public void setPayDate(LocalDate v){payDate=v;}
+    public BigDecimal getRegularHours(){return regularHours;} public void setRegularHours(BigDecimal v){regularHours=v;} public BigDecimal getDoubletimeHours(){return doubletimeHours;} public void setDoubletimeHours(BigDecimal v){doubletimeHours=v;} public BigDecimal getExtraHours1(){return extraHours1;} public void setExtraHours1(BigDecimal v){extraHours1=v;} public BigDecimal getExtraHours2(){return extraHours2;} public void setExtraHours2(BigDecimal v){extraHours2=v;}
+    public BigDecimal getRegularRate(){return regularRate;} public void setRegularRate(BigDecimal v){regularRate=v;} public BigDecimal getDoubletimeRate(){return doubletimeRate;} public void setDoubletimeRate(BigDecimal v){doubletimeRate=v;} public BigDecimal getExtraRate1(){return extraRate1;} public void setExtraRate1(BigDecimal v){extraRate1=v;} public BigDecimal getExtraRate2(){return extraRate2;} public void setExtraRate2(BigDecimal v){extraRate2=v;}
+    public BigDecimal getRegularPay(){return regularPay;} public void setRegularPay(BigDecimal v){regularPay=v;} public BigDecimal getDoubletimePay(){return doubletimePay;} public void setDoubletimePay(BigDecimal v){doubletimePay=v;} public BigDecimal getExtraPay1(){return extraPay1;} public void setExtraPay1(BigDecimal v){extraPay1=v;} public BigDecimal getExtraPay2(){return extraPay2;} public void setExtraPay2(BigDecimal v){extraPay2=v;}
+    public BigDecimal getGrossPay(){return grossPay;} public void setGrossPay(BigDecimal v){grossPay=v;} public BigDecimal getFederalTaxableWages(){return federalTaxableWages;} public void setFederalTaxableWages(BigDecimal v){federalTaxableWages=v;}
+    public BigDecimal getFederalTax(){return federalTax;} public void setFederalTax(BigDecimal v){federalTax=v;} public BigDecimal getSocialSecurityTax(){return socialSecurityTax;} public void setSocialSecurityTax(BigDecimal v){socialSecurityTax=v;} public BigDecimal getMedicareTax(){return medicareTax;} public void setMedicareTax(BigDecimal v){medicareTax=v;} public BigDecimal getPaTax(){return paTax;} public void setPaTax(BigDecimal v){paTax=v;} public BigDecimal getLocalTax(){return localTax;} public void setLocalTax(BigDecimal v){localTax=v;} public BigDecimal getLst(){return lst;} public void setLst(BigDecimal v){lst=v;} public BigDecimal getPaSui(){return paSui;} public void setPaSui(BigDecimal v){paSui=v;}
+    public BigDecimal getHealth(){return health;} public void setHealth(BigDecimal v){health=v;} public BigDecimal getTraditional401k(){return traditional401k;} public void setTraditional401k(BigDecimal v){traditional401k=v;} public BigDecimal getRoth(){return roth;} public void setRoth(BigDecimal v){roth=v;} public BigDecimal getTraditionalCatchUp(){return traditionalCatchUp;} public void setTraditionalCatchUp(BigDecimal v){traditionalCatchUp=v;} public BigDecimal getRothCatchUp(){return rothCatchUp;} public void setRothCatchUp(BigDecimal v){rothCatchUp=v;} public BigDecimal getNetPay(){return netPay;} public void setNetPay(BigDecimal v){netPay=v;} public BigDecimal getEmployerMatch(){return employerMatch;} public void setEmployerMatch(BigDecimal v){employerMatch=v;} public String getStatus(){return status;} public void setStatus(String v){status=v;}
+}
